@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 export const ImageComponent = ({image})=>{
-  const imageUrl = process.env.APP_URL + `/images/${image.source}/${image.fileName}`
+  const imageUrl = process.env.APP_URL + `/api/images/${image.source}/${image.fileName}`
   return <>
     <Image
         src={imageUrl}
