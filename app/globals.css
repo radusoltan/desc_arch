@@ -1,21 +1,27 @@
+@import "flag-icons/css/flag-icons.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.fiCircle {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 24px !important;
+    border-radius: 100%;
+    border: none;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .06);
+    background: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.article-body > p, .article-body > div {
+    @apply mb-5 text-gray-800 dark:text-gray-50;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.article-body > ul {
+    @apply mb-5 dark:text-gray-50
 }
+
+.article-body > blockquote {
+    @apply relative p-4 border-l-4 border-red-700 dark:bg-gray-300 dark:bg-opacity-40 mb-4
+}
+
