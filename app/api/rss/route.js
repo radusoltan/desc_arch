@@ -5,7 +5,7 @@ import TelegramBot from 'node-telegram-bot-api'
 
 export async function GET() {
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
-  const CHAT_ID = "-1002488941068"
+  const CHAT_ID = process.env.TELEGRAM_CHAT_ID
   const bot = new TelegramBot(BOT_TOKEN)
   const parser = new Parser({
     customFields: {
