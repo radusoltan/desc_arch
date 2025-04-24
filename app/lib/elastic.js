@@ -7,5 +7,8 @@ export const client = new Client({
   },
   tls: {
     rejectUnauthorized: false,
-  }
+  },
+  ssl: {
+    rejectUnauthorized: false, // <- Ignoră validarea certificatului
+  },
 })
