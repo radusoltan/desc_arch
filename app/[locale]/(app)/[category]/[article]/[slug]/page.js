@@ -15,7 +15,7 @@ const ArticlePage = async (props)=>{
   const data = await getArticle(article)
   moment.locale(locale)
 
-  const mainImage = data.images.find(image=>image.is_default)
+  const mainImage = data.images?.find(image=>image.is_default) ?? null
 
   return <div className="xl:container mx-auto px-3 sm:px-4 xl:px-2">
     <div className="flex flex-row flex-wrap">
