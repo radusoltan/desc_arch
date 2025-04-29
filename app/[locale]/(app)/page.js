@@ -8,7 +8,7 @@ import Pagination from "@/components/Pagination";
 export const dynamic = 'force-dynamic'
 
 export const getArticles = async (locale, page, size) => {
-  const response = await fetch(`${process.env.APP_URL}/api/content/articles?locale=${locale}&page=${page}&size=${size}`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/content/articles?locale=${locale}&page=${page}&size=${size}`)
   return await response.json()
 
 }

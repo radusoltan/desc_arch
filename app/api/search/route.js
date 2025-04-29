@@ -12,31 +12,29 @@ export async function GET(request){
 
   const from = (page - 1) * size
 
-
-
   const response = await client.search({
     index: 'articles',
     query: {
-      bool: {
-        must: {
-          multi_match: {
-            query:  q,
-            fields: [ "title^3", "lead^2", "content" ],
-            type:   "best_fields"
+      "bool": {
+        "must": {
+          "multi_match": {
+            "query":  "Maia Sandu",
+            "fields": [ "title^3", "lead^2", "content" ],
+            "type":   "best_fields"
           }
         },
-        filter: {
-          term: {
-            "language": locale
+        "filter": {
+          "term": {
+            "language": "ro"
           }
         }
       }
     },
     from,
     size,
-    sort: [
-      { 'published_at': { "order": "desc", format: "strict_date_optional_time_nanos" } },
-    ]
+    // sort: [
+    //   { 'published_at': { "order": "desc", format: "strict_date_optional_time_nanos" } },
+    // ]
   })
 
   return NextResponse.json({
