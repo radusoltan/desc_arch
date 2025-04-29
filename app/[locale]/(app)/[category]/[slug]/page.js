@@ -10,7 +10,7 @@ const getArticle = async article=>{
 
 const ArticlePage = async (props)=>{
 
-  const article = (await props.params).article
+  const article = (await props.params).slug
   const locale = (await props.params).locale
   const data = await getArticle(article)
   moment.locale(locale)

@@ -14,7 +14,7 @@ export async function GET(request){
     query: {
       bool: {
         must: [
-          { match: {"language": locale} }
+            { match: { "language": locale }}
         ]
       }
     }
@@ -23,9 +23,9 @@ export async function GET(request){
   const articleResponse = await client.search({
     index: 'articles',
     query: {
-      bool: {
-        must: [
-          { match: { "language": locale } }
+      "bool": {
+        "must": [
+          { "match": {"language": locale} }
         ]
       }
     },
