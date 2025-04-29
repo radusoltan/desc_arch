@@ -12,17 +12,24 @@ export async function GET(request){
 
   const from = (page - 1) * size
 
+
+
   const response = await client.search({
     index: 'articles',
     query: {
       bool: {
-        must: [
-          { match: { "language": "ro" } },
-          { multi_match: {
-              query: q,
-              fields: ["title^5", "lead","content"]
-            }}
-        ]
+        must: {
+          multi_match: {
+            query:  q,
+            fields: [ "title^3", "lead^2", "content" ],
+            type:   "best_fields"
+          }
+        },
+        filter: {
+          term: {
+            "language": locale
+          }
+        }
       }
     },
     from,
