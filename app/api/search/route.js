@@ -19,7 +19,7 @@ export async function GET(request){
         "must": [
           {
             "multi_match": {
-              "query": "Maia Sandu Meloni",
+              "query": q,
               "fields": ["title^3", "lead^2", "content"],
               "type": "best_fields",
               "operator": "and",  // crește relevanța pentru toate cuvintele cheie
@@ -30,7 +30,7 @@ export async function GET(request){
         "filter": [
           {
             "term": {
-              "language.keyword": "ro" // folosește câmpul `.keyword` pentru potrivire exactă
+              "language.keyword": locale // folosește câmpul `.keyword` pentru potrivire exactă
             }
           }
         ]
