@@ -18,14 +18,14 @@ export async function GET(request){
       "bool": {
         "must": {
           "multi_match": {
-            "query":  "Maia Sandu",
-            "fields": [ "title^3", "lead^2", "content" ],
+            "query":  q,
+            "fields": [ "title^5", "lead^2", "content" ],
             "type":   "best_fields"
           }
         },
         "filter": {
           "term": {
-            "language": "ro"
+            "language": locale
           }
         }
       }
