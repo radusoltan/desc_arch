@@ -14,27 +14,33 @@ export async function GET(request){
 
   const response = await client.search({
     index: 'articles',
-    query: {
-      "bool": {
-        "must": {
-          "multi_match": {
-            "query":  "Maia Sandu",
-            "fields": [ "title^3", "lead^2", "content" ],
-            "type":   "best_fields"
-          }
-        },
-        "filter": {
-          "term": {
-            "language": "ro"
-          }
-        }
-      }
-    },
     from,
     size,
-    // sort: [
-    //   { 'published_at': { "order": "desc", format: "strict_date_optional_time_nanos" } },
-    // ]
+    query: {
+      bool: {
+        must: [
+          {
+            multi_match: {
+              query: q,
+              fields: ["title^3", "lead^2", "content"],
+              type: "best_fields",
+              operator: "and",  // crește relevanța pentru toate cuvintele cheie
+              fuzziness: "AUTO" // permite potriviri aproximative
+            }
+          }
+        ],
+        filter: [
+          {
+            term: {
+              "language.keyword": locale // folosește câmpul `.keyword` pentru potrivire exactă
+            }
+          }
+        ]
+      }
+    },
+    sort: [
+      { published_at: { order: "desc" } }
+    ]
   })
 
   return NextResponse.json({
