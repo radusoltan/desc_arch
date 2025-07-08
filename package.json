@@ -7,8 +7,9 @@
     "build": "i18nexus pull && next build",
     "start": "i18nexus pull && next start",
     "lint": "next lint",
-    "cleanup": "node app/scripts/cleanup-database.js",
-    "cleanup:status": "node app/scripts/check-cleanup-status.js"
+    "cleanup": "node scripts/cleanup-database.js",
+    "cleanup:status": "node app/scripts/check-cleanup-status.js",
+    "cleanup:dry-run": "CLEANUP_DRY_RUN=true node app/scripts/cleanup-database.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.18.1",
