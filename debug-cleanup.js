@@ -100,9 +100,9 @@ async function debugCleanup() {
 
     // Nu putem importa direct din app/ aici, dar putem verifica dacă fișierele există
     const fs = await import('fs');
-    const configExists = fs.existsSync(path.join(__dirname, '../../app/config/cleanup-config.js'));
-    const modelExists = fs.existsSync(path.join(__dirname, '../../app/models/TgPost.js'));
-    const mongooseExists = fs.existsSync(path.join(__dirname, '../../app/lib/mongoose.js'));
+    const configExists = fs.existsSync(path.join(__dirname, '/app/config/cleanup-config.js'));
+    const modelExists = fs.existsSync(path.join(__dirname, '/app/models/TgPost.js'));
+    const mongooseExists = fs.existsSync(path.join(__dirname, '/app/lib/mongoose.js'));
 
     console.log(`   Config: ${configExists ? '✅' : '❌'} cleanup-config.js`);
     console.log(`   Model: ${modelExists ? '✅' : '❌'} TgPost.js`);
