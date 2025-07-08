@@ -1,45 +1,54 @@
-import {NextResponse} from "next/server"
-import {client} from "@/app/lib/elastic"
+import { NextResponse } from "next/server"
+import { client } from "@/app/lib/elastic"
 
-export async function GET(request){
-
+export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
 
-  const page = Number(searchParams.get('page'))
-  const size = Number(searchParams.get('size'))
-  const q = searchParams.get('q');
-  const locale = searchParams.get('locale');
+  const page = Number(searchParams.get('page')) || 1
+  const size = Number(searchParams.get('size')) || 10
+  const q = searchParams.get('q') || ''
+  const locale = searchParams.get('locale')
 
   const from = (page - 1) * size
 
-  const response = await client.search({
-    index: 'articles',
-    query: {
-      "bool": {
-        "must": {
-          "multi_match": {
-            "query":  "Maia Sandu",
-            "fields": [ "title^3", "lead^2", "content" ],
-            "type":   "best_fields"
-          }
-        },
-        "filter": {
-          "term": {
-            "language": "ro"
-          }
+  const mustQuery = {
+    multi_match: {
+      query: q,
+      fields: ["title^3", "lead^2", "content"],
+      type: "best_fields",
+      operator: "and",
+      fuzziness: "AUTO"
+    }
+  }
+
+  const boolQuery = {
+    must: [mustQuery]
+  }
+
+  if (locale) {
+    boolQuery.filter = [
+      {
+        term: {
+          "language.keyword": locale
         }
       }
-    },
+    ]
+  }
+
+  const response = await client.search({
+    index: 'articles',
     from,
     size,
-    // sort: [
-    //   { 'published_at': { "order": "desc", format: "strict_date_optional_time_nanos" } },
-    // ]
+    query: {
+      bool: boolQuery
+    },
+    sort: [
+      { published_at: { order: "desc" } }
+    ]
   })
 
   return NextResponse.json({
     results: response.hits.hits,
     total: response.hits.total.value,
   })
-
 }

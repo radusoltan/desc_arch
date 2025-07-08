@@ -20,7 +20,7 @@ const SearchPage = async ({params,searchParams})=>{
       <article
           className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-between items-center mb-5 text-gray-500">
-          <Link href={`/${locale}/${res._source.category.slug}/${res._id}/${res._source.slug}`}><span
+          <Link href={`/${locale}/${res._source.category.slug}/${res._source.slug}`}><span
               className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                       {res._source.category.title}
                   </span></Link>
@@ -29,7 +29,7 @@ const SearchPage = async ({params,searchParams})=>{
           }</span>
         </div>
         <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><Link
-            href={`/${locale}/${res._source.category.slug}/${res._id}/${res._source.slug}`}>{res._source.title}</Link>
+            href={`/${locale}/${res._source.category.slug}/${res._source.slug}`}>{res._source.title}</Link>
         </h2>
 
         <div className="flex justify-between items-center">
@@ -39,7 +39,7 @@ const SearchPage = async ({params,searchParams})=>{
                   res._source.authors.map(author => author.full_name).join(', ') : "Deschide.MD"
             }</span>
           </div>
-          <Link href={`/${locale}/${res._source.category.slug}/${res._id}/${res._source.slug}`}
+          <Link href={`/${locale}/${res._source.category.slug}/${res._source.slug}`}
                 className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
             Read more
             <svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
