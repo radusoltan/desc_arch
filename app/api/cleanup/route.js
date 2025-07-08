@@ -1,4 +1,4 @@
-import dbConnect from "@/app/lib/mongoose";
+import dbConnect from "@/app/lib/mongoose.js";
 import { NextResponse } from "next/server";
 import { CLEANUP_CONFIG, CLEANUP_SETTINGS, validateConfig } from "@/app/config/cleanup-config.js";
 
@@ -196,8 +196,7 @@ ${Object.entries(results.results).map(([key, result]) =>
 // GET endpoint pentru verificarea statusului
 export async function GET(request) {
   try {
-    validateConfig();
-
+    // Verifică autentificarea
     const authHeader = request.headers.get('authorization');
     if (!CLEANUP_SETTINGS.secretKey || authHeader !== `Bearer ${CLEANUP_SETTINGS.secretKey}`) {
       return NextResponse.json(
@@ -205,6 +204,9 @@ export async function GET(request) {
         { status: 401 }
       );
     }
+
+    // Validează configurația
+    validateConfig();
 
     await dbConnect();
 
@@ -242,6 +244,7 @@ export async function GET(request) {
     });
 
   } catch (error) {
+    console.error('❌ GET cleanup error:', error);
     return NextResponse.json(
       { error: 'Status check failed', details: error.message },
       { status: 500 }

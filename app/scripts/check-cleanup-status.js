@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Încarcă variabilele de mediu
-config({ path: path.join(__dirname, '../.env.local') });
+// Încarcă variabilele de mediu - calea corectată către root
+config({ path: path.join(__dirname, '../../.env.local') });
 
 async function checkStatus() {
   try {
@@ -89,6 +89,7 @@ async function checkStatus() {
       console.log('');
       console.log('💡 Soluție: Adaugă CLEANUP_SECRET_KEY în fișierul .env.local');
       console.log('   Exemplu: CLEANUP_SECRET_KEY=your-secret-key-here');
+      console.log('   Locația fișierului: /var/www/desc_arch/.env.local');
     }
 
     if (error.message.includes('fetch')) {

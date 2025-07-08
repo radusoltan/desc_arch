@@ -3,7 +3,8 @@
  * Acest fișier definește regulile pentru fiecare colecție
  */
 
-import TgPost from "@/app/models/TgPost.js";
+// Importăm modelul cu calea corectă pentru ES modules
+import TgPost from "../models/TgPost.js";
 
 export const CLEANUP_CONFIG = {
   // Configurația pentru TgPost
