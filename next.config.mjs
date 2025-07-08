@@ -11,10 +11,10 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'arhiva.deschide.md',
       },
-      // {
-      //   protocol: 'https',
-      //   hostname: 'cdn.prod.website-files.com',
-      // }
+      {
+        protocol: 'https',
+        hostname: 'cdn.prod.website-files.com',
+      }
     ]
   }
 };
